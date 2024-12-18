@@ -7,7 +7,11 @@
 #show: ams-article.with(
   title: [Estimating Utility Functions for Predictably Irrational Agents with Preference
     Change],
-  authors: ((name: "Patrick Pan"),),
+  authors: ((
+    name: "Patrick Pan",
+    // department: [Department of Philosophy],
+    // organization: [University of California, Berkeley],
+  ),),
   abstract: [
     This paper introduces an adaptive estimator for utility functions that accounts
     for agents exhibiting predictably irrational behavior through a Bayesian
@@ -15,19 +19,18 @@
     utility theorem, the model I propose accommodates both errors in decision-making
     and dynamic changes in preferences, reflecting more realistic human behavior.
     Specifially, I utilize a sigmoid policy function following Hadfield-Mennell
-    (2016)@Hadfield-Menell to model the likelihood of an error being committed over
-    a choice between two lotteries, and I model changes in an agent's utility using
-    a Lévy Flight, a type of random walk also used to model financial instruments.
-    In addition, I argue that both the vNM theorem and Ng and Russell's (2000)
-    approach to modeling utility functions using Inverse Reinforcement Learning are
-    significantly limited by their assumptions of time-invariant preferences and
-    infallibility. Comparative simulations demonstrate that the adaptive estimator
-    consistently outperforms an estimator that assumes ideal rationality as far as
-    possible in accurately modeling utility functions.
+    (2016) to model the likelihood of an error being committed over a choice between
+    two lotteries, and I model changes in an agent's utility using a Lévy Flight, a
+    type of random walk also used to model financial instruments. In addition, I
+    argue that both the vNM theorem and Ng and Russell's (2000) approach to modeling
+    utility functions using Inverse Reinforcement Learning are significantly limited
+    by their assumptions of time-invariant preferences and infallibility.
+    Comparative simulations demonstrate that the adaptive estimator consistently
+    outperforms an estimator that assumes ideal rationality as far as possible in
+    accurately modeling utility functions.
   ],
   bibliography: bibliography("refs.bib", style: "chicago-notes"),
 )
-
 #set text(font: "EB Garamond")
 
 #set text(top-edge: 0.7em, bottom-edge: -0.3em)
@@ -489,12 +492,11 @@ commit errors in predictable ways and exhibit preference change.
 
 == Limitations of the MDP <limitations_inverse_reinforcement_learning:mdp_limitations>
 
-In @vnm_assumptions:errors and
-@vnm_assumptions:changing_utility_functions, I argued that we can model
-humans as agents which commit errors in predictable ways and whose utility
-functions change in predictable ways time. In particular, I argued that the
-probability of error $epsilon(A, B)$ between two lotteries $A$ and $B$ is a
-function of the utilities of $A$ and $B$, and that change in the utility
+In @vnm_assumptions:errors and @vnm_assumptions:changing_utility_functions, I
+argued that we can model humans as agents which commit errors in predictable
+ways and whose utility functions change in predictable ways time. In particular,
+I argued that the probability of error $epsilon(A, B)$ between two lotteries $A$ and $B$ is
+a function of the utilities of $A$ and $B$, and that change in the utility
 function can be modeled as a Lévy flight, a special kind of random walk.
 Examination of the MDP formalism shows that it can accommodate neither of these
 claims about human behavior. I will justify these claims in this order, first
@@ -595,9 +597,9 @@ $R(x_1, dot, dot, t_2) < R(x_2, dot, dot, t_2)$.
 Although this change would allow for time-variant preferences, restrictions
 within the MDP formalism would not allow modeling preference change as a
 statistcally governed process. As described in
-@vnm_assumptions:changing_utility_functions, preference change can be
-expected to typically be small but contain occasional large jumps. Constraints
-of this form can be expressed using a probability distribution for $R(x, dot, dot, t_j)$ conditional
+@vnm_assumptions:changing_utility_functions, preference change can be expected
+to typically be small but contain occasional large jumps. Constraints of this
+form can be expressed using a probability distribution for $R(x, dot, dot, t_j)$ conditional
 on $R(x, dot, dot, t_i)$ for $i < j$. To maximally satisfy these constraints, we
 would need to maximize the joint likelihood produced by the products of
 $Pr(R(x, dot, dot, t_j) | R(x, dot, dot, t_i))$.
@@ -1281,3 +1283,9 @@ preference-satisfaction, and that human preferences are subject to error and
 change, a successful strategy for AI alignment must be able to accommodate these
 phenomena. As we have seen in this paper, the adaptive estimator I introduced
 may provide a statistical methodology that can successfully achieve this task.
+
+= Source Code
+
+The source code for this paper, simulations, and results can be found at:
+
+https://github.com/patrickhpan/learning-changing-utility
